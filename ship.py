@@ -1,4 +1,9 @@
 import pygame
+import sys
+
+from PIL import Image
+
+SHIP_IMAGES = {'ship_one': 'alien_invasion_ship1.bmp'}
 
 class Ship():
 
@@ -7,7 +12,19 @@ class Ship():
         self.screen = screen
 
         # Load the ship image and get its rect.
-        self.image = pygame.image.load('H:\SpaceApes\SpaceApes-Programing\Projects\python_game\alien_invasion_ship1.bmp')
+        """Quelle: https://www.geeksforgeeks.org/python-pil-image-resize-method/
+        reszie all images to same szise
+        """
+        ship_image = ''
+        while ship_image == '':
+            new_ship_size = (50, 50)
+            try:
+                loaded_ship_image = Image.open(SHIP_IMAGES['ship_one'])
+                ship_image = loaded_ship_image.resize(new_ship_size)
+            except:
+                print('Exception ', sys.exc_info()[0], ' occured.')    
+
+        self.image = pygame.image.load(ship_image)
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -18,3 +35,7 @@ class Ship():
     def blitme(self):
         """"Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect)
+
+"""
+aktuell kommt das ship in einem falschen format
+"""
