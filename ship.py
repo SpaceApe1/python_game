@@ -3,28 +3,17 @@ import sys
 
 from PIL import Image
 
-SHIP_IMAGES = {'ship_one': 'alien_invasion_ship1.bmp'}
+SHIP_IMAGES = {'ship_one': "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_ship1_150x.bmp"}
 
 class Ship():
 
-    def __init__(self,screen):
+    def __init__(self, ai_settings, screen):
         """Initialize the ship and set its starting position."""
         self.screen = screen
+        self.ai_settings = ai_settings
 
         # Load the ship image and get its rect.
-        """Quelle: https://www.geeksforgeeks.org/python-pil-image-resize-method/
-        reszie all images to same szise
-        """
-        ship_image = ''
-        while ship_image == '':
-            new_ship_size = (50, 50)
-            try:
-                loaded_ship_image = Image.open(SHIP_IMAGES['ship_one'])
-                ship_image = loaded_ship_image.resize(new_ship_size)
-            except:
-                print('Exception ', sys.exc_info()[0], ' occured.')    
-
-        self.image = pygame.image.load(ship_image)
+        self.image = pygame.image.load(SHIP_IMAGES['ship_one'])
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -32,10 +21,25 @@ class Ship():
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom
 
+        # Store decimal value for the ship's center.
+        self.center = float(self.rect.centerx)    
+
+        # Moving flags
+        self.moving_right = False
+        self.moving_left = False
+
+    def update(self):
+        """Update the ship's position based on movment flags."""
+        # Update the ship's center value, not the rect.
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.center += self.ai_settings.ship_speed_factor
+        if self.moving_left and self.rect.left > 0:
+            self.center -= self.ai_settings.ship_speed_factor
+        
+        # Update rect object from self.center.
+        self.rect.centerx = self.center
+
     def blitme(self):
         """"Draw the ship at its current location."""
         self.screen.blit(self.image, self.rect)
 
-"""
-aktuell kommt das ship in einem falschen format
-"""
