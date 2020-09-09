@@ -48,12 +48,15 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-def update_screen(ai_settings, screen, ship, bullets):
+def update_screen(ai_settings, screen, ship, alien, bullets):
     # Redraw thescreen  during each pass through the loop.
     screen.fill(ai_settings.bg_color)
+
     # Redraw all bullets behind ship and aliens
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
+    alien.blitme()
+
     # Make the most recently draw screen visiblae.
     pygame.display.flip()
