@@ -1,6 +1,9 @@
 import pygame
 from pygame.sprite import Sprite
 
+ALIEN_IMAGE = {'alien_one' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x200.bmp",
+'alien_two' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x100.bmp"}
+
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
 
@@ -11,7 +14,7 @@ class Alien(Sprite):
         self.ai_settings = ai_settings
 
         # Load the alien image 1 and set its rect attribute.
-        self.image = pygame.image.load('image/alien_invasion_alien1_200x200.bmp')
+        self.image = pygame.image.load(ALIEN_IMAGE['alien_two'])
         self.rect = self.image.get_rect()
 
         # Start each new alien at the top of the screen
@@ -23,4 +26,4 @@ class Alien(Sprite):
     
     def blitme(self):
         """Draw the alien at the current location."""
-        self.image.blit(self.image, self.rect)
+        self.screen.blit(self.image, self.rect)
