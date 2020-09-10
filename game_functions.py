@@ -62,19 +62,37 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     # Make the most recently draw screen visiblae.
     pygame.display.flip()
 
-def create_fleet(ai_settings, screen, aliens):
+def get_number_rows(ai_settings, ship_height, alien_height):
+    """Determine the number of rows that fit on the screen."""
+    avalible_space_y = (ai_settings.screen_height - 
+                            (3 * alien_height) - ship_height)
+    number_rows = int(avalible_space_y / (2 * alien_height))
+    return number_rows
+
+def get_number_aliens(ai_settings, alien_width):
+    """Determine the number of aliens that fin in the row."""
+    avalible_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(avalible_space_x / (2 * alien_width))
+    return number_aliens_x
+
+def create_alien(ai_settings, screen, aliens, alien_number, row_number):
+    """Create an alien and place it in the row."""
+    alien = Alien(ai_settings, screen)
+    alien_width = alien.rect.width
+    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.rect.x = alien.x
+    alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
+    aliens.add(alien)
+
+def create_fleet(ai_settings, screen, ship, aliens):
     """Create a full fleet of alien."""
     # Create an alien and find the number of aluens in a row.
     # Spacing between each alien is equal to one alien with.
     alien = Alien(ai_settings, screen)
-    alien_width = alien.rect.width
-    avalible_space_x = ai_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(avalible_space_x / (2 * alien_width))
+    number_aliens_x = get_number_aliens(ai_settings, alien.rect.width)
+    number_rows = get_number_rows(ai_settings, ship.rect.height, alien.rect.height)
 
     # Create the first row of aliens.
-    for alien_number in range(number_aliens_x):
-        # Create an alien and place it in the row.
-        alien = Alien(ai_settings, screen)
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        aliens.add(alien)
+    for row_number in range(number_rows):
+        for alien_number in range(number_aliens_x):
+            create_alien(ai_settings, screen, aliens, alien_number, row_number)
