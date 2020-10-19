@@ -3,7 +3,12 @@ import sys
 
 from PIL import Image
 
-SHIP_IMAGES = {'ship_one': "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_ship1_150x.bmp"}
+# windows path
+# SHIP_IMAGES = {'ship_one': "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_ship1_150x.bmp"}
+
+# mac path
+SHIP_IMAGES = {'ship_one': "/Users/kaihubner/Documents/GitHub/python_game/images/alien_invasion_ship1_150x.bmp"}
+
 
 class Ship():
 

@@ -1,10 +1,18 @@
 import pygame
 from pygame.sprite import Sprite
 
-ALIEN_IMAGE = {
+# windows path
+"""ALIEN_IMAGE = {
     'alien_one' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x200.bmp",
     'alien_two' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x100.bmp",
     'alien_three' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_100x50.bmp"}
+"""
+
+# mac path
+ALIEN_IMAGE = {
+    'alien_one' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x200.bmp",
+    'alien_two' : "H:\SpaceApes\SpaceApes-Programing\Projects\python_game\images\\alien_invasion_alien1_200x100.bmp",
+    'alien_three' : "/Users/kaihubner/Documents/GitHub/python_game/images/alien_invasion_alien1_100x50.bmp"}
 
 class Alien(Sprite):
     """A class to represent a single alien in the fleet."""
